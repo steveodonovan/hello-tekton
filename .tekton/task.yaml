@@ -52,10 +52,9 @@ spec:
           value: $(params.registryNamespace)
         - name: IMAGE_NAME
           value: $(params.imageName)
-      command: ["/bin/bash", "-c"]
+      command: ["sudo /bin/bash", "-c"]
       args:
-        - su -;
-          set -e -o pipefail;
+        - set -e -o pipefail;
           echo test;
           ibmcloud login -a $API -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
