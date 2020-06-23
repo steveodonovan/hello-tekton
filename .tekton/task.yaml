@@ -123,7 +123,7 @@ spec:
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
     - name: check-vulnerabilities
-      image: ibmcom/pipeline-base-image
+      image: ubuntu
       env:
         - name: IBMCLOUD_API_KEY
           value: $(params.apikey)
