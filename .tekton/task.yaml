@@ -52,7 +52,7 @@ spec:
           value: $(params.registryNamespace)
         - name: IMAGE_NAME
           value: $(params.imageName)
-      command: ["sudo /bin/bash", "-c"]
+      command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
           whoami
