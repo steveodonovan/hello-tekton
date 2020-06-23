@@ -38,7 +38,7 @@ spec:
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
     - name: pre-build-check
-      image: ibmcom/pipeline-base-image
+      image: ubuntu
       env:
         - name: IBMCLOUD_API_KEY
           value: $(params.apikey)
@@ -55,6 +55,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
+          echo test;
           ibmcloud login -a $API -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           cd /workspace && source pre-build-check.sh;
