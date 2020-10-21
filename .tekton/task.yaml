@@ -175,6 +175,8 @@ spec:
   steps:
     - name: clone-repo
       image: alpine/git
+      securityContext:
+        privileged: true
       env:
         - name: REPOSITORY
           value: $(params.repository)
@@ -215,6 +217,8 @@ spec:
           cd /workspace && source pre-deploy-check.sh;
     - name: deploy-to-kubernetes
       image: ibmcom/pipeline-base-image
+      securityContext:
+        privileged: true
       env:
         - name: IBMCLOUD_API_KEY
           value: $(params.apikey)
