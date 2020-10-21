@@ -27,6 +27,8 @@ spec:
   steps:
     - name: clone-repo
       image: alpine/git
+      securityContext:
+        privileged: true
       env:
         - name: REPOSITORY
           value: $(params.repository)
