@@ -35,6 +35,15 @@ spec:
         volumeMode: Filesystem
         accessModes:
           - ReadWriteOnce
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineResource
+      metadata:
+        name: image-to-build
+      spec:
+        type: image
+        params:
+          - name: url
+            value: "us.icr.io/stevepipeline/hello-containers-tekton:master-0-20200717143143"
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
@@ -46,6 +55,10 @@ spec:
           - name: pipeline-pvc
             persistentVolumeClaim:
               claimName: pipelinerun-$(uid)-pvc
+        resources:
+          - name: app-image
+            resourceRef:
+              name: image-to-build
         params:
         - name: repository
           value: $(params.repository)
