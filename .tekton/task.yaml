@@ -114,6 +114,12 @@ spec:
       default: "https://cloud.ibm.com"
     - name: registryRegion
       description: the ibmcloud registry region   
+  resources:
+    inputs:
+      - name: image
+        type: image
+        description: "(Optional) The image that has to be VA scanned"
+        optional: true
   workspaces:
   - name: task-pvc
     mountPath: /artifacts         
