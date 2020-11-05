@@ -26,7 +26,6 @@ spec:
       - name: built-image
         type: image
         description: "(Optional) The image to build"
-        optional: true
   workspaces:
   - name: task-pvc
     mountPath: /artifacts   
