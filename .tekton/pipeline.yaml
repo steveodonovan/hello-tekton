@@ -23,6 +23,9 @@ spec:
     - name: clusterNamespace
       description: The Kubernetes cluster namespace
       default: prod
+  resources:
+    - name: app-image
+      type: image
   workspaces:
   - name: pipeline-pvc
   tasks:
@@ -40,6 +43,10 @@ spec:
           value: $(params.registryNamespace)
         - name: registryRegion
           value: $(params.registryRegion)
+      resources:
+        outputs:
+          - name: built-image
+            resource: app-image
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc          
@@ -56,6 +63,12 @@ spec:
           value: $(params.apikey)
         - name: registryRegion
           value: $(params.registryRegion)
+      resources:
+        inputs:
+          - name: image
+            resource: app-image
+            from:
+              - build-task
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc            
