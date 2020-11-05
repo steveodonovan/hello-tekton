@@ -21,6 +21,12 @@ spec:
       default: "hello-containers-tekton"
     - name: registryRegion
       description: the ibmcloud registry region
+  resources:
+    outputs:
+      - name: built-image
+        type: image
+        description: "(Optional) The image to build"
+        optional: true
   workspaces:
   - name: task-pvc
     mountPath: /artifacts   
@@ -62,8 +68,6 @@ spec:
           cd /workspace && source pre-build-check.sh;
     - name: build-docker-image
       image: ibmcom/pipeline-base-image
-      securityContext:
-        privileged: true
       env:
         - name: IBMCLOUD_API_KEY
           value: $(params.apikey)
